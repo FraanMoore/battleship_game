@@ -1,1 +1,30 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+h1 {
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+tr {
+  border: solid 3px white;
+}
+th {
+  text-align: center;
+  border: solid 3px white;
+  background-color: lightgray;
+  width: 60px;
+  height: 60px;
+}
+
+td {
+  background-color: lightblue;
+  border: solid 3px white;
+  width: 30px;
+  height: 50px;
+}
