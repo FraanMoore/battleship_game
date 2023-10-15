@@ -28,3 +28,11 @@ td {
   width: 30px;
   height: 50px;
 }
+
+#fireButton {
+  text-align: center; /* Centra horizontalmente el contenido */
+  display: flex;
+  justify-content: center; /* También centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  height: 30px;
+}
