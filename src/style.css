@@ -30,17 +30,12 @@ td {
 }
 
 #fireButton {
-  text-align: center; /* Centra horizontalmente el contenido */
+  text-align: center;
   display: flex;
-  justify-content: center; /* También centra horizontalmente el contenido */
-  align-items: center; /* Centra verticalmente el contenido */
-  height: 30px;
-}
-
-#fireButton {
-  display: flex;
+  align-items: center;
+  height: 3 0px;
   justify-content: center;
   position: relative;
-  top: 250px;
+  top: auto;
   left: 40px;
 }
