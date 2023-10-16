@@ -36,3 +36,11 @@ td {
   align-items: center; /* Centra verticalmente el contenido */
   height: 30px;
 }
+
+#fireButton {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 250px;
+  left: 40px;
+}
