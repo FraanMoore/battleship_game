@@ -1,56 +1,47 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 
-const FireButton = () => {
-  const [x, setX] = useState("");
-  const [y, setY] = useState("");
+const FireButton = ({ onFire }) => {
+  const [X, setX] = useState("");
+  const [Y, setY] = useState("");
 
-  const openPopupWindow = () => {
-    const popupWindow = window.open("", "Coordenadas", "width=400,height=400");
-
-    const getCoordinate = () => {
-      const coordinateX = x;
-      const coordinateY = y;
-      alert(`Coordenadas ingresadas: X=${coordinateX}, Y=${coordinateY}`);
-      popupWindow.close();
-    };
-    const container = popupWindow.document.body;
-
-    const contentShoot = (
-      <div>
-        <h2>Ingresa tus coordenadas:</h2>
-        <div className="mb-3">
-          <label htmlFor="x" className="form-label">
-            Coordenada X
-          </label>
-          <input
-            type="text"
-            id="x"
-            value={x}
-            onChange={e => setX(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="y" className="form-label">
-            Coordenada Y
-          </label>
-          <input
-            type="text"
-            id="y"
-            value={y}
-            onChange={e => setY(e.target.value)}
-          />
-        </div>
-        <button onClick={getCoordinate}>Aceptar</button>
-      </div>
-    );
-    ReactDOM.render(contentShoot, container);
+  const handleFire = () => {
+    if (X && Y) {
+      onFire(parseInt(X, 10) - 1, parseInt(Y, 10) - 1);
+      setX("");
+      setY("");
+    } else {
+      alert("Please enter valid coordinates.");
+    }
   };
 
   return (
-    <button type="button" onClick={openPopupWindow}>
-      Disparar
-    </button>
+    <div className="fire-button-container">
+      <label>
+        X:
+        <input
+          type="number"
+          min="1"
+          max="9"
+          value={X}
+          onChange={e => setX(e.target.value)}
+        />
+      </label>
+
+      <label>
+        Y:
+        <input
+          type="number"
+          min="1"
+          max="9"
+          value={Y}
+          onChange={e => setY(e.target.value)}
+        />
+      </label>
+
+      <button type="button" className="btn" onClick={handleFire}>
+        Disparar
+      </button>
+    </div>
   );
 };
 

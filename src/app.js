@@ -5,26 +5,12 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import FireButton from "./shoot";
 
 function App() {
-  //hacer boton emergente para agregar las coordenadas
-  //agregar tablero de coordenadas
-  //que las coordenadas ingresadas las lea el tablero
-  //al momento de poner las coordenadas tiene que aparecer el mensaje de "shoot"
-
-  // let fireTorpedo;
-  // function openFireTorpedo() {
-  //   fireTorpedo = onclick;
-  // }
-  // 0 = empty
-  // 1 = part of a ship
-  // 2 = a sunken part of a ship
-  // 3 = a missed shot
-
-  let gameBoard = [
+  const [gameBoard, setGameBoard] = useState([
     [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -35,23 +21,27 @@ function App() {
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
-  ];
+  ]);
 
-  const shoot = (line, column) => {
-    if (gameBoard[line][column] === 1) {
+  const shoot = (X, Y) => {
+    if (gameBoard[X][Y] === 1) {
       alert("Diste al blanco!");
-      gameBoard[line][column] = 2;
-    } else if (gameBoard[line][column] === 0) {
+      setGameBoard(prevBoard => {
+        const newBoard = [...prevBoard];
+        newBoard[X][Y] = 2;
+        return newBoard;
+      });
+    } else if (gameBoard[X][Y] === 0) {
       alert("Fallaste!");
-      gameBoard[line][column] = 3;
+      setGameBoard(prevBoard => {
+        const newBoard = [...prevBoard];
+        newBoard[X][Y] = 3;
+        return newBoard;
+      });
     } else {
       alert("Ya habías dispado aquí!");
     }
   };
-
-  //shoot(1, 1);
-
-  //HASTA AQUI FUNCIONA BIEN//
 
   return (
     <div>
@@ -69,136 +59,31 @@ function App() {
               <th>7</th>
               <th>8</th>
               <th>9</th>
+              <th>10</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>4</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>5</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>6</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>7</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>8</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>9</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            {gameBoard.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                <th>{rowIndex + 1}</th>
+                {row.map((cell, YIndex) => (
+                  <td key={YIndex}></td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
-        {/* <div class="position-relative">
-          <button
-            id="fireButton"
-            type="button"
-            class="btn btn-outline-secondary"
-          >
-            Disparar
-          </button>
-        </div> */}
+        <div className="position-relative">
+          <FireButton onFire={shoot} />
+        </div>
       </div>
-
-      {/* <FireButton /> */}
     </div>
   );
 }
+
 document.addEventListener("DOMContentLoaded", function() {
-  const app = document.getElementById("fireButton");
-  ReactDOM.render(<FireButton />, app);
+  const root = ReactDOM.createRoot(document.getElementById("app"));
+  root.render(<App />);
 });
+
 export default App;
