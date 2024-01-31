@@ -16,7 +16,7 @@ const FireButton = ({ onFire }) => {
 
   return (
     <div className="fire-button-container">
-      <label>
+      <label id="X">
         X:
         <input
           type="number"
@@ -27,7 +27,7 @@ const FireButton = ({ onFire }) => {
         />
       </label>
 
-      <label>
+      <label id="Y">
         Y:
         <input
           type="number"
@@ -38,7 +38,7 @@ const FireButton = ({ onFire }) => {
         />
       </label>
 
-      <button type="button" className="btn" onClick={handleFire}>
+      <button id="fire" type="button" className="btn" onClick={handleFire}>
         Disparar
       </button>
     </div>

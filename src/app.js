@@ -73,7 +73,7 @@ function App() {
             ))}
           </tbody>
         </table>
-        <div className="position-relative">
+        <div id="shootContainer" className="position-relative">
           <FireButton onFire={shoot} />
         </div>
       </div>
